@@ -12,4 +12,6 @@ public interface CreditCardService {
     Mono<CreditCard> consume(String cardId, ConsumptionRequest request);
     Mono<CreditCard> payBalance(String cardId, PaymentRequest request);
     Flux<ConsumptionRecord> getConsumptions(String cardId);
+    Mono<Boolean> hasActiveCard(String customerId);
+    Flux<CreditCard> getCustomerCards(String customerId);
 }

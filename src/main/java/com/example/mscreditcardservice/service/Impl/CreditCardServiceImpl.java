@@ -52,6 +52,15 @@ class CreditCardServiceImpl implements CreditCardService {
                     return creditCardRepository.save(card);
                 });
     }
+    @Override
+    public Mono<Boolean> hasActiveCard(String customerId) {
+        return creditCardRepository.existsByCustomerIdAndStatus(customerId, CreditCardStatus.ACTIVE);
+    }
+
+    @Override
+    public Flux<CreditCard> getCustomerCards(String customerId) {
+        return creditCardRepository.findByCustomerId(customerId);
+    }
 
     @Override
     public Flux<ConsumptionRecord> getConsumptions(String cardId) {

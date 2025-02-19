@@ -32,6 +32,16 @@ public class CreditCardController {
     public Flux<ConsumptionRecord> getConsumptions(@PathVariable String cardId) {
         return creditCardService.getConsumptions(cardId);
     }
+
+    @GetMapping("/customer/{customerId}/active")
+    public Mono<Boolean> hasActiveCard(@PathVariable String customerId) {
+        return creditCardService.hasActiveCard(customerId);
+    }
+
+    @GetMapping("/customer/{customerId}")
+    public Flux<CreditCard> getCustomerCards(@PathVariable String customerId) {
+        return creditCardService.getCustomerCards(customerId);
+    }
 }
 
 
