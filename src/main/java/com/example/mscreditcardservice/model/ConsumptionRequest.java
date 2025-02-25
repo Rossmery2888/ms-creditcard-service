@@ -13,3 +13,4 @@ public class ConsumptionRequest {
     private BigDecimal amount;
 }
 
+

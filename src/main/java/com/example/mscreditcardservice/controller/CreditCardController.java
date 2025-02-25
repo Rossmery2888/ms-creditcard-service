@@ -42,6 +42,12 @@ public class CreditCardController {
     public Flux<CreditCard> getCustomerCards(@PathVariable String customerId) {
         return creditCardService.getCustomerCards(customerId);
     }
+
+    // New endpoint for last 10 movements
+    @GetMapping("/{cardId}/last-movements")
+    public Flux<ConsumptionRecord> getLastTenMovements(@PathVariable String cardId) {
+        return creditCardService.getLastTenMovements(cardId);
+    }
 }
 
 

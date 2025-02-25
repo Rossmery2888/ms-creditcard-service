@@ -6,6 +6,7 @@ import com.example.mscreditcardservice.repository.ConsumptionRecordRepository;
 import com.example.mscreditcardservice.repository.CreditCardRepository;
 import com.example.mscreditcardservice.service.CreditCardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -65,6 +66,13 @@ class CreditCardServiceImpl implements CreditCardService {
     @Override
     public Flux<ConsumptionRecord> getConsumptions(String cardId) {
         return consumptionRecordRepository.findByCreditCardId(cardId);
+    }
+
+    @Override
+    public Flux<ConsumptionRecord> getLastTenMovements(String cardId) {
+        return creditCardRepository.findById(cardId)
+                .flatMapMany(card -> consumptionRecordRepository
+                        .findByCreditCardIdOrderByTimestampDesc(cardId, PageRequest.of(0, 10)));
     }
 }
 
